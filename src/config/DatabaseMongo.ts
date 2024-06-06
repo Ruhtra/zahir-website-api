@@ -1,17 +1,13 @@
 import { Db, MongoClient } from "mongodb";
 
-// const MONGODB_HOST = ;
-
-// const MONGODB_PORT = 27017;
-
 export class Database {
   private db?: Db;
   private static instance: Database;
 
   private constructor() {}
 
-  async init() {
-    const client = new MongoClient(process.env.MONGOURI);
+  async init(uriConnet: string) {
+    const client = new MongoClient(uriConnet);
     await client.connect();
     this.db = client.db("zahir_website");
   }

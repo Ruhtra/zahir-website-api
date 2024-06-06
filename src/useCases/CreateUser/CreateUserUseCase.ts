@@ -7,11 +7,15 @@ export class CreateUserUseCase {
         private usersRepository: IUsersRepository
     ) {}
 
-    async execute(data: ICreateUserRequestDto) {
-        const userExist = await this.usersRepository.findByUsername(data.username)
-
+    async execute({ email, name, picture, role }: ICreateUserRequestDto) {
+        const userExist = await this.usersRepository.findByEmail(email)
         if (userExist) throw new Error("Usuário ja existe");
 
-        await this.usersRepository.save(new User(data))
+        await this.usersRepository.createUser(new User({
+            email,
+            name,
+            picture,
+            role
+        }))
     }
 }

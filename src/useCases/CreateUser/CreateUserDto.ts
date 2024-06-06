@@ -1,4 +1,6 @@
 export interface ICreateUserRequestDto {
-    username: string
-    password: string
+    name: string
+    email: string
+    picture?: string
+    role?: "admin" | "user"
 }
