@@ -1,6 +1,6 @@
 import { User } from "../../entities/User"
 import { IGoogleAuthApiProvider } from "../../providers/IGoogleAuthApiProvider"
-import { UpsertUserUseCase } from "../UserUseCases/UpsertUserUseCase/UpsertUserUseCase"
+import { UpsertUserUseCase } from "../UserUseCases/UpsertUser/UpsertUserUseCase"
 import { AuthGoogleError, GoogleUserNotEmailVerified } from "./AuthGoogleErrors"
 
 export class AuthGoogleUseCase {

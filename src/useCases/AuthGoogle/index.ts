@@ -1,5 +1,5 @@
 import { GoogleAuthApiProvider } from "../../providers/implementations/GoogleAuthApiProvider";
-import { upsertUserUseCase } from "../UserUseCases/UpsertUserUseCase";
+import { upsertUserUseCase } from "../UserUseCases/UpsertUser";
 import { AuthGoogleController } from "./AuthGoogleController";
 import { AuthGoogleUseCase } from "./AuthGoogleUseCase";
 

@@ -11,10 +11,8 @@ export class User {
 
     constructor(props: User) {
         Object.assign(this, props);
-        this.role = props.role || "user";
 
-        // if (!id) {
-        //     this._id = uuid();
-        // }
+        // if (!id) this._id = uuid();
+        if (!this.role) this.role = 'user'
     }
 }
