@@ -1,5 +1,4 @@
 import { ObjectId } from "mongodb";
-import { ICreateUserRequestDto } from "../CreateUser/CreateUserDto";
 
 export interface IUpdateUserDto {
     id: ObjectId

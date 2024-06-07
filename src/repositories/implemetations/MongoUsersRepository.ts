@@ -24,7 +24,8 @@ export class MongoUsersRepository implements IUsersRepository {
 
         return user;
     }
-    async updateUser(id: ObjectId, newUser: User): Promise<void> {
+    
+    async update(id: ObjectId, newUser: User): Promise<void> {
         const db = Database.getInstance().getDb()
 
         let response = await db.collection(tableGoogleuser).updateOne(
@@ -33,17 +34,8 @@ export class MongoUsersRepository implements IUsersRepository {
         );
         
     }
-    async createUser(user: User): Promise<void> {
+    async save(user: User): Promise<void> {
         const db = Database.getInstance().getDb()
         await db.collection(tableGoogleuser).insertOne(user)
-    }
-
-    async createOrUpdateUser(user: User): Promise<User> {
-        const userFounded = await this.findByEmail(user.email)
-
-        if (!userFounded) this.updateUser(userFounded.id, user)
-        else this.createUser(user)
-
-        return await this.findByEmail(user.email)
     }
 }
