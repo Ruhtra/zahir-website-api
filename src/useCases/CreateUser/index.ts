@@ -4,8 +4,8 @@ import { CreateUserUseCase } from "./CreateUserUseCase";
 
 
 
-const repsository = new MongoUsersRepository()
-const createUserUseCase = new CreateUserUseCase(repsository)
+const repository = new MongoUsersRepository()
+const createUserUseCase = new CreateUserUseCase(repository)
 
 
 // const createUserController = new CreateUserController(createUserUseCase)

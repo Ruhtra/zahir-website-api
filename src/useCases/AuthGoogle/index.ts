@@ -1,9 +1,9 @@
 import { MongoUsersRepository } from "../../repositories/implemetations/MongoUsersRepository";
-import { CreateUserUseCase } from "../CreateUser/CreateUserUseCase";
+import { upsertUserDto } from "../UpsertUserUseCase";
 import { AuthGoogleController } from "./AuthGoogleController";
 
 const repository = new MongoUsersRepository()
-const authGoogleController = new AuthGoogleController(repository)
+const authGoogleController = new AuthGoogleController(upsertUserDto)
 
 export {
     authGoogleController

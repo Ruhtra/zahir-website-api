@@ -3,6 +3,8 @@ import axios from "axios";
 import { Request, Response } from "express";
 import { stringify } from "qs";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { CreateUserUseCase } from "../CreateUser/CreateUserUseCase";
+import { UpsertUserUseCase } from "../UpsertUserUseCase/UpsertUserUseCase";
 
 interface GoogleAuthResponse {
     access_token: string;
@@ -75,7 +77,7 @@ export interface queryType {
 
 export class AuthGoogleController {
     constructor(
-        private repository: IUsersRepository
+        private upsertUserUseCase: UpsertUserUseCase
     ){}
 
     async handle(request: Request, response: Response) {
@@ -95,8 +97,8 @@ export class AuthGoogleController {
             // filtra usuários que não tem email verificado
             if (!googleUserResponse.verified_email) return response.status(403).send("Google account is not verified")
 
-            // atualiza o usuário no banco de dados
-            const user = await this.repository.createOrUpdateUser({
+            // atualiza o usuário no banco de dados 
+            const user = await this.upsertUserUseCase.execute({
                 name: googleUserResponse.name,
                 email: googleUserResponse.email,
                 picture: googleUserResponse.picture

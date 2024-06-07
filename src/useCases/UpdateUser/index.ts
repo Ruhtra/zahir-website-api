@@ -1,7 +1,10 @@
-import { UpdateUserController } from "./UpdateUserController"
+import { MongoUsersRepository } from "../../repositories/implemetations/MongoUsersRepository"
+import { UpdateUserUseCase } from "./UpdateUserUseCase"
 
-const updateUserController = new UpdateUserController()
+const mongoUsersRepository = new MongoUsersRepository()
+
+const updateUserUseCase = new UpdateUserUseCase(mongoUsersRepository)
 
 export {
-    updateUserController
+    updateUserUseCase
 }
