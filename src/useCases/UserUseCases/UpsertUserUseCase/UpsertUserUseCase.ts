@@ -1,5 +1,5 @@
-import { User } from "../../entities/User";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { User } from "../../../entities/User";
+import { IUsersRepository } from "../../../repositories/IUsersRepository";
 import { CreateUserUseCase } from "../CreateUser/CreateUserUseCase";
 import { UpdateUserUseCase } from "../UpdateUser/UpdateUserUseCase";
 import { IUpsertUserRequestDto } from "./UpsertUserDto";

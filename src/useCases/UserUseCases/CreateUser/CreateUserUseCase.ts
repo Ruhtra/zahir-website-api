@@ -1,5 +1,5 @@
-import { User } from "../../entities/User";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { User } from "../../../entities/User";
+import { IUsersRepository } from "../../../repositories/IUsersRepository";
 import { ICreateUserRequestDto } from "./CreateUserDto";
 
 export class CreateUserUseCase {
@@ -11,7 +11,7 @@ export class CreateUserUseCase {
         const userExist = await this.usersRepository.findByEmail(email)
         if (userExist) throw new Error("Usuário ja existe");
 
-        await this.usersRepository.createUser(new User({
+        await this.usersRepository.save(new User({
             email,
             name,
             picture,

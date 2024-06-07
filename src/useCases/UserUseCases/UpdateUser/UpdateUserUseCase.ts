@@ -1,5 +1,5 @@
-import { User } from "../../entities/User";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { User } from "../../../entities/User";
+import { IUsersRepository } from "../../../repositories/IUsersRepository";
 import { IUpdateUserDto } from "./UpdateUserDto";
 
 export class UpdateUserUseCase {
@@ -11,7 +11,7 @@ export class UpdateUserUseCase {
         const userExist = await this.userRepository.findById(id)
         if (!userExist) throw new Error("Usuário não existe");
 
-        await this.userRepository.updateUser(id, new User({
+        await this.userRepository.update(id, new User({
             email: user.email,
             name: user.name,
             picture: user.picture,

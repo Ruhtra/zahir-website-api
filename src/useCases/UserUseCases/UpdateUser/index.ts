@@ -1,4 +1,4 @@
-import { MongoUsersRepository } from "../../repositories/implemetations/MongoUsersRepository"
+import { MongoUsersRepository } from "../../../repositories/implemetations/MongoUsersRepository"
 import { UpdateUserUseCase } from "./UpdateUserUseCase"
 
 const mongoUsersRepository = new MongoUsersRepository()
