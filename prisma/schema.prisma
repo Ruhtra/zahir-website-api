@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  user
+  admin
+}
+
+model Googleuser {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  email   String
+  name    String
+  picture String
+  role    Role   @default(user)
+
+  @@map("googleUser")
+}
+
+// homepage
+model Home_page_promotion {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  order Int
+
+  profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String  @unique @db.ObjectId
+
+  @@map("home_page_promotions")
+}
+
+// categories 
+model Categorie {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+
+  profile CategorieProfile[]
+
+  @@map("categories")
+}
+
+model CategorieProfile {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  categorieId String    @db.ObjectId
+  Categorie   Categorie @relation(fields: [categorieId], references: [id])
+
+  Profile   Profile @relation(fields: [profileId], references: [id])
+  profileId String  @db.ObjectId
+}
+
+// profile
+type ProfileLocal {
+  cep          String
+  city         String
+  complement   String?
+  lat          Float
+  lng          Float
+  neighborhood String
+  number       String
+  street       String
+  uf           String
+}
+
+type ProfilePicture {
+  key  String
+  name String
+  size Int
+  url  String
+}
+
+type ProfilePromotion {
+  description String
+  title       String
+}
+
+type ProfileTelephones {
+  telephone String[]
+  whatsapp  String[]
+}
+
+enum categoryType {
+  restaurante
+  hotel
+}
+
+model Profile {
+  id                   String               @id @default(auto()) @map("_id") @db.ObjectId
+  informations         String
+  local                ProfileLocal
+  categoryType         categoryType
+  categorie            CategorieProfile[]
+  movie                String?
+  name                 String
+  picture              ProfilePicture
+  promotion            ProfilePromotion?
+  resume               String
+  telephones           ProfileTelephones
+  createdAt            DateTime             @db.Date
+  home_page_promotions Home_page_promotion?
+
+  @@map("profile")
+}
