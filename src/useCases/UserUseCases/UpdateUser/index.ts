@@ -1,9 +1,9 @@
-import { MongoUsersRepository } from "../../../repositories/implemetations/MongoUsersRepository"
+import { GoogleUserRepository } from "../../../repositories/implemetations/GoogleUserRepository"
 import { UpdateUserUseCase } from "./UpdateUserUseCase"
 
-const mongoUsersRepository = new MongoUsersRepository()
+const googleUserRepository = new GoogleUserRepository()
 
-const updateUserUseCase = new UpdateUserUseCase(mongoUsersRepository)
+const updateUserUseCase = new UpdateUserUseCase(googleUserRepository)
 
 export {
     updateUserUseCase

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ProfileRepository } from "../../../repositories/implemetations/ProfileRepository";
 import { ObjectId } from "mongodb";
+import { ProfileRepository } from "../../../repositories/implemetations/ProfileRepository";
 
 export class GetProfileController {
     constructor (

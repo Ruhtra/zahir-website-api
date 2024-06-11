@@ -1,12 +1,12 @@
-import { MongoUsersRepository } from "../../../repositories/implemetations/MongoUsersRepository";
+import { GoogleUserRepository } from "../../../repositories/implemetations/GoogleUserRepository";
 import { createUserUseCase } from "../CreateUser";
 import { updateUserUseCase } from "../UpdateUser";
 import { UpsertUserUseCase } from "./UpsertUserUseCase";
 
-const repository = new MongoUsersRepository()
+const googleUserRepository = new GoogleUserRepository()
 
 const upsertUserUseCase = new UpsertUserUseCase(
-    repository,
+    googleUserRepository,
     createUserUseCase,
     updateUserUseCase
 )

@@ -1,5 +1,5 @@
+import { Profile } from "@prisma/client"
 import { ObjectId } from "mongodb"
-import { Profile } from "../entities/Profile"
 
 export interface IProfilesRepository {
     findById: (id: ObjectId) => Promise<Profile>

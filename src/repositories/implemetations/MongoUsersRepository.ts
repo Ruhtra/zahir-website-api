@@ -1,11 +1,11 @@
 import { ObjectId } from "mongodb";
 import { Database } from "../../config/DatabaseMongo";
 import { User } from "../../entities/User";
-import { IUsersRepository } from "../IUsersRepository";
+import { IGoogleUserRepository } from "../IGoogleUserRepository";
 
 const tableGoogleuser = 'googleUser'
 
-export class MongoUsersRepository implements IUsersRepository {
+export class MongoUsersRepository implements IGoogleUserRepository {
     async findByEmail(email: string): Promise<User> {
         const db = Database.getInstance().getDb()
 

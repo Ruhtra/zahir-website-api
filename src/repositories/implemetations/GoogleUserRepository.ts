@@ -1,11 +1,11 @@
 import { ObjectId } from "mongodb";
-import { User } from "../../entities/User";
-import { IUsersRepository } from "../IUsersRepository";
+import { IGoogleUserRepository } from "../IGoogleUserRepository";
 import { prismaClient } from "../../prisma";
+import { Googleuser } from "@prisma/client";
 
-export class GoogleUserRepository implements IUsersRepository {
-    findByEmail(email: string): Promise<User> {
-        const googleUser = prismaClient.user.findFirst({
+export class GoogleUserRepository implements IGoogleUserRepository {
+    async findByEmail(email: string): Promise<Googleuser> {
+        const googleUser = await prismaClient.googleuser.findFirst({
             where: {
                 email: email
             }
@@ -13,13 +13,38 @@ export class GoogleUserRepository implements IUsersRepository {
 
         return googleUser
     }
-    findById(id: ObjectId): Promise<User> {
-        throw new Error("Method not implemented.");
+    async findById(id: ObjectId): Promise<Googleuser> {
+        const googleUser = await prismaClient.googleuser.findFirst({
+            where: {
+                id: id.toString()
+            }
+        })
+
+        return googleUser
     }
-    update(id: ObjectId, newUser: User): Promise<void> {
-        throw new Error("Method not implemented.");
+    async update(id: ObjectId, newUser: Googleuser): Promise<void> {
+        const googleUser = await prismaClient.googleuser.update({
+            data: {
+                email: newUser.email,
+                name: newUser.name,
+                picture: newUser.picture,
+                role: newUser.role
+            },
+            where: {
+                id: id.toString()
+            }
+        })
+
+        console.log(googleUser);
+        
+
     }
-    save(user: User): Promise<void> {
-        throw new Error("Method not implemented.");
+    async save(user: Googleuser): Promise<void> {
+        const googleUser = await prismaClient.googleuser.create({
+            data: user
+        })
+
+        console.log(googleUser);
+        
     }
 }
