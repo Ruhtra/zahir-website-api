@@ -14,10 +14,11 @@ export class ProfileRepository implements IProfilesRepository {
         return profile
     }
     async all (): Promise<Profile[]> {
-        const profiles = await prismaClient.profile.findMany({})
-
-        console.log(profiles);
-        
+        const profiles = await prismaClient.profile.findMany({
+            include: {
+                categorie: true,
+            }
+        })
         
         return profiles
     }

@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import { IGoogleUserRepository } from "../IGoogleUserRepository";
 import { prismaClient } from "../../prisma";
-import { Googleuser } from "@prisma/client";
+import { $Enums, Googleuser } from "@prisma/client";
 
 export class GoogleUserRepository implements IGoogleUserRepository {
     async findByEmail(email: string): Promise<Googleuser> {
@@ -36,7 +36,7 @@ export class GoogleUserRepository implements IGoogleUserRepository {
         })
 
         console.log(googleUser);
-        
+
 
     }
     async save(user: Googleuser): Promise<void> {
@@ -45,6 +45,19 @@ export class GoogleUserRepository implements IGoogleUserRepository {
         })
 
         console.log(googleUser);
+
+    }
+    async upsert(email: string, user: Omit<Googleuser, "id">): Promise<void> {
+        const googleuser = await prismaClient.googleuser.upsert({
+            create: user,
+            update: user,
+            where: {
+                email: email
+            }
+        })
+
+        console.log(googleuser);
         
     }
+
 }

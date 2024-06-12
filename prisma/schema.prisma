@@ -14,7 +14,7 @@ enum Role {
 
 model Googleuser {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  email   String
+  email   String @unique
   name    String
   picture String
   role    Role   @default(user)
@@ -38,19 +38,10 @@ model Categorie {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String @unique
 
-  profile CategorieProfile[]
+  profileId String[]  @db.ObjectId
+  profile   Profile[] @relation(fields: [profileId], references: [id])
 
   @@map("categories")
-}
-
-model CategorieProfile {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-
-  categorieId String    @db.ObjectId
-  Categorie   Categorie @relation(fields: [categorieId], references: [id])
-
-  Profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String  @db.ObjectId
 }
 
 // profile
@@ -93,10 +84,11 @@ model Profile {
   informations         String
   local                ProfileLocal
   categoryType         categoryType
-  categorie            CategorieProfile[]
+  categorieId          String[]             @db.ObjectId
+  categorie            Categorie[]          @relation(fields: [categorieId], references: [id])
   movie                String?
   name                 String
-  picture              ProfilePicture
+  picture              ProfilePicture?
   promotion            ProfilePromotion?
   resume               String
   telephones           ProfileTelephones

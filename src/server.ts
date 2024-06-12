@@ -10,8 +10,8 @@ async function initModules() {
     console.log(" ~. Starting modules...");
 
     // Initialize Dbs
-    const database = Database.getInstance();
-    await database.init(process.env.MONGOURI);
+    // const database = Database.getInstance();
+    // await database.init(process.env.MONGOURI);
 
     //Initialize App
 

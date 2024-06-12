@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ObjectId } from "mongodb";
 import { ProfileRepository } from "../../../repositories/implemetations/ProfileRepository";
+import { MappingProfileResponseDto } from "./GetprofileDto";
 
 export class GetProfileController {
     constructor (
@@ -13,7 +14,10 @@ export class GetProfileController {
             if (!id)  throw new Error("Id parameter is Required")
     
             const profile = await this.profileRepository.findById(new ObjectId(id))
-            return response.json(profile)
+
+            const profileDto = MappingProfileResponseDto(profile)
+
+            return response.json(profileDto)
         } catch (error) {
             return response.status(500).send("Erro ao procurar pelo profile")
         }

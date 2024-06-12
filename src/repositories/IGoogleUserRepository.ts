@@ -7,5 +7,6 @@ export interface IGoogleUserRepository {
 
     update(id: ObjectId, newUser: Omit<Googleuser, 'id'>): Promise<void>
     save(user: Omit<Googleuser, 'id'>): Promise<void>
+    upsert: (email: string, user:Omit<Googleuser, 'id'>) => Promise<void>
 
 }

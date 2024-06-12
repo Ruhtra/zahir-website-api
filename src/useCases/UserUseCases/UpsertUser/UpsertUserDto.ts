@@ -1,6 +1,9 @@
-export interface IUpsertUserRequestDto {
-    name: string
-    email: string
-    picture?: string
-    role?: "admin" | "user"
-}
+import { Googleuser } from "@prisma/client"
+
+export interface IUpsertUserRequestDto extends Pick<
+    Googleuser,
+    'name' |
+    'email' |
+    'picture' |
+    'role'
+> { }
