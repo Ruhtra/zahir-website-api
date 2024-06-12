@@ -12,9 +12,10 @@ export class GetAllprofileController {
             const profiles = await this.profileRepository.all()
 
             const profileDto = MappingListAllProfileResponseDto(profiles)
-    
+
             return response.json(profileDto)
         } catch (error) {
+            console.error(error);
             return response.status(500).send("Erro ao buscar profiles")
         }
     }

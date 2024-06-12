@@ -2,9 +2,10 @@ import { ObjectId } from "mongodb";
 import { IProfilesRepository } from "../IProfilesRepository";
 import { Profile } from "@prisma/client";
 import { prismaClient } from "../../prisma";
+import { ProfileWithCategorie } from "../../useCases/ProfileUseCases/GetAllProfile/GetAllProfileDto";
 
 export class ProfileRepository implements IProfilesRepository {
-    async findById (id: ObjectId): Promise<Profile> {
+    async findById(id: ObjectId): Promise<Profile> {
         const profile = await prismaClient.profile.findFirst({
             where: {
                 id: id.toString()
@@ -13,13 +14,13 @@ export class ProfileRepository implements IProfilesRepository {
 
         return profile
     }
-    async all (): Promise<Profile[]> {
+    async all(): Promise<ProfileWithCategorie[]> {
         const profiles = await prismaClient.profile.findMany({
             include: {
                 categorie: true,
             }
         })
-        
+
         return profiles
     }
     save: (profile: Profile) => Promise<void>;

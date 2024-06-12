@@ -1,4 +1,5 @@
-import { $Enums, Profile } from "@prisma/client";
+import { Profile } from "@prisma/client";
+import { Mapper } from "../../../utils/Mapper";
 
 export interface IGetProfileResponseDto extends Pick<
     Profile,
@@ -18,20 +19,36 @@ export interface IGetProfileResponseDto extends Pick<
 }
 
 export function MappingProfileResponseDto(profile: Profile): IGetProfileResponseDto {
-    const response: IGetProfileResponseDto = {
-        picture: profile.picture?.url,
-        id: profile.id,
-        createdAt: profile.createdAt,
-        name: profile.name,
-        informations: profile.informations,
-        telephones: profile.telephones,
-        local: profile.local,
-        movie: profile.movie,
-        resume: profile.resume,
-        categoryType: profile.categoryType,
-        categorieId: profile.categorieId,
-        promotion: profile.promotion
+    const targetTemplate: IGetProfileResponseDto = {
+        picture: "",
+        id: "",
+        createdAt: undefined,
+        name: "",
+        informations: "",
+        telephones: {
+            telephone: [],
+            whatsapp: []
+        },
+        local: {
+            cep: "",
+            city: "",
+            complement: "",
+            lat: 0,
+            lng: 0,
+            neighborhood: "",
+            number: "",
+            street: "",
+            uf: ""
+        },
+        movie: "",
+        resume: "",
+        categoryType: "restaurante",
+        categorieId: [],
+        promotion: {
+            description: "",
+            title: ""
+        }
     }
 
-    return response
+    return Mapper<Profile, IGetProfileResponseDto>(profile, targetTemplate)
 }

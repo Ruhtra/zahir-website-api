@@ -1,35 +1,54 @@
-import { Categorie, Profile, ProfileLocal } from "@prisma/client"
+import { Categorie, Prisma, Profile, ProfileLocal } from "@prisma/client"
+import { Mapper } from "../../../utils/Mapper";
 
 
+const profileWithCategorie = Prisma.validator<Prisma.ProfileDefaultArgs>()({
+    include: { categorie: true },
+})
+export type ProfileWithCategorie = Prisma.ProfileGetPayload<typeof profileWithCategorie>
 
 export interface IGetAllProfileResposeDto extends Pick<
-    Profile,
+    ProfileWithCategorie,
     'id' |
     'name' |
     'picture' |
     'categoryType' |
-    'promotion' |
-    'categorieId'
+    'promotion' 
 > {
     local: Pick<ProfileLocal, 'city' | 'uf'>
+    categorie: Pick<Categorie, 'id' | 'name'>[]
 }
 
-export function MappingAllProfileResponseDto(profile: Profile): IGetAllProfileResposeDto {
-    const response: IGetAllProfileResposeDto = {
-        id: profile.id,
-        name: profile.name,
+export function MappingListAllProfileResponseDto(profiles: ProfileWithCategorie[]): IGetAllProfileResposeDto[] {
+    const targetTemplate: IGetAllProfileResposeDto = {
+        id: null,
         local: {
-            city: profile.local.city,
-            uf: profile.local.uf
+            city: null,
+            uf: null
         },
-        categoryType: profile.categoryType,
-        categorieId: profile.categorieId,
-        picture: profile.picture ?? null,
-        promotion: profile.promotion ?? null
-    }
-    return response
-}
+        name: null,
+        picture: {
+            key: null,
+            name: null,
+            size: null,
+            url: null
+        },
+        categoryType: null,
+        promotion: {
+            description: null,
+            title: null
+        },
+        categorie: [
+            {
+                id: null,
+                name: null
+            }
+        ]
+    };
 
-export function MappingListAllProfileResponseDto(profile: Profile[]): IGetAllProfileResposeDto[] {
-    return profile.map(e => MappingAllProfileResponseDto(e))
+    const response = profiles.map(profile => {
+        return Mapper<ProfileWithCategorie, IGetAllProfileResposeDto>(profile, targetTemplate);
+    })
+
+    return response
 }

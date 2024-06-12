@@ -19,6 +19,7 @@ export class GetProfileController {
 
             return response.json(profileDto)
         } catch (error) {
+            console.error(error);
             return response.status(500).send("Erro ao procurar pelo profile")
         }
     }

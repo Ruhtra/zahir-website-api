@@ -92,7 +92,7 @@ model Profile {
   promotion            ProfilePromotion?
   resume               String
   telephones           ProfileTelephones
-  createdAt            DateTime             @db.Date
+  createdAt            DateTime             @db.Date @default(now())
   home_page_promotions Home_page_promotion?
 
   @@map("profile")

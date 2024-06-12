@@ -3,7 +3,6 @@ import fs from 'fs';
 import https from 'https';
 
 import { app } from "./app";
-import { Database } from "./config/DatabaseMongo";
 import path from 'path';
 
 async function initModules() {
