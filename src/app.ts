@@ -1,10 +1,18 @@
 import express from "express";
 import session from "express-session";
 import { router } from "./router";
+import cors from "cors";
 
 const app = express()
 
 app.use(express.json())
+
+// Configure CORS para permitir de qualquer origem
+app.use(cors({
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+    origin: true
+}));
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
@@ -28,6 +36,7 @@ app.use((req, res, next) => {
 
     next()
 })
+
 
 app.use('/api', router)
 
