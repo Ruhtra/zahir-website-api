@@ -1,4 +1,3 @@
-import { GoogleUserCreate } from "../../../entities/User";
 import { IGoogleUserRepository } from "../../../repositories/IGoogleUserRepository";
 import { IUpsertUserRequestDto } from "./UpsertUserDto";
 import { GoogleUser } from "@prisma/client";
@@ -15,7 +14,7 @@ export class UpsertUserUseCase {
             picture,
             role
         })
-        
+
         return await this.repository.findByEmail(email)
     }
 }
