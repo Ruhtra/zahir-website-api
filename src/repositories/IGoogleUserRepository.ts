@@ -1,12 +1,12 @@
 import { ObjectId } from "mongodb";
-import { Googleuser } from "@prisma/client";
+import { GoogleUser } from "../entities/User";
 
 export interface IGoogleUserRepository {
-    findByEmail(email: string): Promise<Googleuser>
-    findById(id: ObjectId): Promise<Googleuser>
+    findByEmail(email: string): Promise<GoogleUser>
+    findById(id: ObjectId): Promise<GoogleUser>
 
-    update(id: ObjectId, newUser: Omit<Googleuser, 'id'>): Promise<void>
-    save(user: Omit<Googleuser, 'id'>): Promise<void>
-    upsert: (email: string, user:Omit<Googleuser, 'id'>) => Promise<void>
+    update(id: ObjectId, newUser: Omit<GoogleUser, 'id'>): Promise<void>
+    save(user: Omit<GoogleUser, 'id'>): Promise<void>
+    upsert: (email: string, user:Omit<GoogleUser, 'id'>) => Promise<void>
 
 }

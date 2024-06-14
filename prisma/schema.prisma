@@ -12,7 +12,7 @@ enum Role {
   admin
 }
 
-model Googleuser {
+model GoogleUser {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
   email   String @unique
   name    String

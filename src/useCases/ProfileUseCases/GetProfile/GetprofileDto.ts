@@ -1,5 +1,4 @@
-import { Profile } from "@prisma/client";
-import { Mapper } from "../../../utils/Mapper";
+import { Profile } from "../../../entities/Profile";
 
 export interface IGetProfileResponseDto extends Pick<
     Profile,
@@ -12,43 +11,39 @@ export interface IGetProfileResponseDto extends Pick<
     'movie' |
     'resume' |
     'categoryType' |
-    'categorieId' |
     'promotion'
 > {
-    picture: string
+    picture: Profile['picture']['url']
 }
 
 export function MappingProfileResponseDto(profile: Profile): IGetProfileResponseDto {
-    const targetTemplate: IGetProfileResponseDto = {
-        picture: "",
-        id: "",
-        createdAt: undefined,
-        name: "",
-        informations: "",
+    return {
+        picture: profile.picture ? profile.picture.url : null,
+        id: profile.id,
+        createdAt: profile.createdAt,
+        name: profile.name,
+        informations: profile.informations,
         telephones: {
-            telephone: [],
-            whatsapp: []
+            telephone: profile.telephones.telephone,
+            whatsapp: profile.telephones.whatsapp
         },
         local: {
-            cep: "",
-            city: "",
-            complement: "",
-            lat: 0,
-            lng: 0,
-            neighborhood: "",
-            number: "",
-            street: "",
-            uf: ""
+            cep: profile.local.cep,
+            city: profile.local.city,
+            complement: profile.local.complement,
+            lat: profile.local.lat,
+            lng: profile.local.lng,
+            neighborhood: profile.local.neighborhood,
+            number: profile.local.number,
+            street: profile.local.street,
+            uf: profile.local.uf
         },
-        movie: "",
-        resume: "",
-        categoryType: "restaurante",
-        categorieId: [],
-        promotion: {
-            description: "",
-            title: ""
-        }
+        movie: profile.movie,
+        resume: profile.resume,
+        categoryType: profile.categoryType,
+        promotion: profile.promotion ? {
+            description: profile.promotion.description,
+            title: profile.promotion.title
+        }: null
     }
-
-    return Mapper<Profile, IGetProfileResponseDto>(profile, targetTemplate)
 }

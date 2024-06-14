@@ -1,9 +1,10 @@
-import { Googleuser } from "@prisma/client"
+import { $Enums, GoogleUser } from "@prisma/client"
 
 export interface IUpsertUserRequestDto extends Pick<
-    Googleuser,
+    GoogleUser,
     'name' |
     'email' |
-    'picture' |
-    'role'
-> { }
+    'picture' 
+> {
+    role?: $Enums.Role
+}

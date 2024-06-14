@@ -1,4 +1,4 @@
-import { Googleuser } from "@prisma/client"
+import { GoogleUser } from "@prisma/client"
 import { IGoogleAuthApiProvider } from "../../providers/IGoogleAuthApiProvider"
 import { UpsertUserUseCase } from "../UserUseCases/UpsertUser/UpsertUserUseCase"
 import { GoogleUserNotEmailVerified } from "./AuthGoogleErrors"
@@ -9,7 +9,7 @@ export class AuthGoogleUseCase {
         private googleAuthApi: IGoogleAuthApiProvider
     ) { }
 
-    async execute(code: string): Promise<Googleuser> {
+    async execute(code: string): Promise<GoogleUser> {
         // Obtém informações do usuario com o token
         // const googleUser = jwt.decode(id_token)
         const { id_token, access_token } = await this.googleAuthApi.getGoogleOauthToken(code)

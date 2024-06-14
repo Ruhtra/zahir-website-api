@@ -1,10 +1,10 @@
-import { Googleuser } from "@prisma/client";
 import { ObjectId } from "mongodb";
+import { GoogleUser } from "../../../entities/User";
 
 export interface IUpdateUserDto {
     id: ObjectId
     user: Pick<
-        Googleuser,
+        GoogleUser,
         'email' |
         'name' |
         'picture' |

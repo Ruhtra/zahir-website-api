@@ -1,7 +1,7 @@
-import { Googleuser } from "@prisma/client"
+import { GoogleUser } from "../../../entities/User";
 
 export interface ICreateUserRequestDto extends Pick<
-    Googleuser,
+    GoogleUser,
     'name' |
     'email' |
     'picture' |

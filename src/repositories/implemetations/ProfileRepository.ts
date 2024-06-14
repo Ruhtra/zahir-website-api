@@ -1,8 +1,7 @@
 import { ObjectId } from "mongodb";
 import { IProfilesRepository } from "../IProfilesRepository";
-import { Profile } from "@prisma/client";
 import { prismaClient } from "../../prisma";
-import { ProfileWithCategorie } from "../../useCases/ProfileUseCases/GetAllProfile/GetAllProfileDto";
+import { Profile, ProfileWithCategorie } from "../../entities/Profile";
 
 export class ProfileRepository implements IProfilesRepository {
     async findById(id: ObjectId): Promise<Profile> {
