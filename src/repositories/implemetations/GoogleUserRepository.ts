@@ -1,11 +1,11 @@
 import { ObjectId } from "mongodb";
 import { IGoogleUserRepository } from "../IGoogleUserRepository";
 import { prismaClient } from "../../prisma";
-import { $Enums, Googleuser } from "@prisma/client";
+import { GoogleUser } from "../../entities/User";
 
 export class GoogleUserRepository implements IGoogleUserRepository {
-    async findByEmail(email: string): Promise<Googleuser> {
-        const googleUser = await prismaClient.googleuser.findFirst({
+    async findByEmail(email: string): Promise<GoogleUser> {
+        const googleUser = await prismaClient.googleUser.findFirst({
             where: {
                 email: email
             }
@@ -13,8 +13,8 @@ export class GoogleUserRepository implements IGoogleUserRepository {
 
         return googleUser
     }
-    async findById(id: ObjectId): Promise<Googleuser> {
-        const googleUser = await prismaClient.googleuser.findFirst({
+    async findById(id: ObjectId): Promise<GoogleUser> {
+        const googleUser = await prismaClient.googleUser.findFirst({
             where: {
                 id: id.toString()
             }
@@ -22,8 +22,8 @@ export class GoogleUserRepository implements IGoogleUserRepository {
 
         return googleUser
     }
-    async update(id: ObjectId, newUser: Googleuser): Promise<void> {
-        const googleUser = await prismaClient.googleuser.update({
+    async update(id: ObjectId, newUser: GoogleUser): Promise<void> {
+        const googleUser = await prismaClient.googleUser.update({
             data: {
                 email: newUser.email,
                 name: newUser.name,
@@ -39,16 +39,16 @@ export class GoogleUserRepository implements IGoogleUserRepository {
 
 
     }
-    async save(user: Googleuser): Promise<void> {
-        const googleUser = await prismaClient.googleuser.create({
+    async save(user: GoogleUser): Promise<void> {
+        const googleUser = await prismaClient.googleUser.create({
             data: user
         })
 
         console.log(googleUser);
 
     }
-    async upsert(email: string, user: Omit<Googleuser, "id">): Promise<void> {
-        const googleuser = await prismaClient.googleuser.upsert({
+    async upsert(email: string, user: Omit<GoogleUser, "id">): Promise<void> {
+        const googleuser = await prismaClient.googleUser.upsert({
             create: user,
             update: user,
             where: {

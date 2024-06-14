@@ -22,6 +22,18 @@ export class ProfileRepository implements IProfilesRepository {
 
         return profiles
     }
+
+    async recents(): Promise<Profile[]> {
+        const recents = await prismaClient.profile.findMany({
+            take: 7,
+            orderBy: {
+                createdAt: 'desc', 
+            },
+        });
+
+        return recents
+    };
+    
     save: (profile: Profile) => Promise<void>;
     update: (id: ObjectId, Profile: Profile) => Promise<void>;
     delete: (id: ObjectId) => Promise<void>;
