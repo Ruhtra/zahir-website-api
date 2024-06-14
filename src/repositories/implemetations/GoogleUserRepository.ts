@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
 import { IGoogleUserRepository } from "../IGoogleUserRepository";
 import { prismaClient } from "../../prisma";
-import { GoogleUser } from "../../entities/User";
+import { GoogleUser } from "../../entities/GoogleUser";
 
 export class GoogleUserRepository implements IGoogleUserRepository {
     async findByEmail(email: string): Promise<GoogleUser> {

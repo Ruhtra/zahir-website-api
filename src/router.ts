@@ -5,6 +5,7 @@ import { getAllprofileController } from "./useCases/ProfileUseCases/GetAllProfil
 import { getAllHomePageController } from "./useCases/HomePageUseCases/GetAllHomePage";
 import { getRecentProfileController } from "./useCases/ProfileUseCases/GetRecentProfile";
 import { getAllCategorieController } from "./useCases/CategorieUseCases/GetAllCategorie";
+import { getGoogleUserController } from "./useCases/GoogleUserUseCases/GetGoogleUser";
 
 const router = Router()
 
@@ -19,6 +20,10 @@ router.get('/homePage/all', (req, res) => getAllHomePageController.handle(req, r
 
 
 router.get('/categorie/all', (req, res) => getAllCategorieController.handle(req, res))
+
+
+
+router.get('/getUser', (req, res) => getGoogleUserController.handle(req, res))
 
 
 export { router }

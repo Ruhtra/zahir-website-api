@@ -1,4 +1,4 @@
-import { User } from "./entities/User";
+import { User } from "./entities/GoogleUser";
 
 declare global {
     namespace NodeJS {

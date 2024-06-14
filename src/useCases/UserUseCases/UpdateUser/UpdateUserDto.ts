@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { GoogleUser } from "../../../entities/User";
+import { GoogleUser } from "../../../entities/GoogleUser";
 
 export interface IUpdateUserDto {
     id: ObjectId

@@ -1,4 +1,4 @@
-import { GoogleUser } from "../../../entities/User";
+import { GoogleUser } from "../../../entities/GoogleUser";
 
 export interface ICreateUserRequestDto extends Pick<
     GoogleUser,
